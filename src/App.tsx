@@ -4,18 +4,36 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { StateProvider } from "context/StateProvider";
 import { ClassicalFetchA } from "components/ClassicalFetchA";
 import { ClassicalFetchB } from "components/ClassicalFetchB";
+import { ReactQueryA } from "components/ReactQueryA";
+import { ReactQueryB } from "components/ReactQueryB";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export const App: VFC = () => {
   return (
-    <BrowserRouter>
-      <StateProvider>
-        <Layout>
-          <Routes>
-            <Route path="/fetch-a" element={<ClassicalFetchA />} />
-            <Route path="/fetch-b" element={<ClassicalFetchB />} />
-          </Routes>
-        </Layout>
-      </StateProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <StateProvider>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<ReactQueryA />} />
+              <Route path="/query-b" element={<ReactQueryB />} />
+              <Route path="/fetch-a" element={<ClassicalFetchA />} />
+              <Route path="/fetch-b" element={<ClassicalFetchB />} />
+            </Routes>
+          </Layout>
+        </StateProvider>
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 };
