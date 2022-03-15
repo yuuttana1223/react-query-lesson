@@ -15,7 +15,7 @@ type StateContextType = {
   setIsDark: Dispatch<SetStateAction<boolean>>;
 };
 
-const StateContext = createContext({} as StateContextType);
+export const StateContext = createContext({} as StateContextType);
 
 type Props = {
   children: ReactNode;
