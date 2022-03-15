@@ -10,7 +10,7 @@ export const ClassicalFetchB = () => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <h1 className="mb-3 text-center font-bold">ClassicalFetchA</h1>
+      <h1 className="mb-3 text-center font-bold">ClassicalFetchB</h1>
       {tasks?.map((task) => (
         <p key={task.id}>{task.title}</p>
       ))}
